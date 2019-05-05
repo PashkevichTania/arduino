@@ -1,3 +1,4 @@
+
 const byte section[4] = {2,3,4,5};
 const byte data_pin = 11;
 const byte sh_pin = 12;
@@ -48,11 +49,12 @@ void setup() {
 }
 
 void loop() {
-  m=(millis()/1000%10);
-  dm=(millis()/10000%100);
-  h=(millis()/100000%1000);
-  dh=(millis()/1000000%10000);
-    
+	int time=(millis()/1000);
+  	m=(time%60%10);
+  	dm=(time%60/10);
+    h=(time/60%10);
+    dh=(time/60/10);
+  
 	selectSection(0);
   	printDigit(m);
   	delay(5);
@@ -67,3 +69,11 @@ void loop() {
 	delay(5);
 }
     
+        
+        
+        
+        
+        
+        
+        
+        
