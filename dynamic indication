@@ -1,0 +1,63 @@
+const byte section[4] = {2,3,4,5};
+const byte data_pin = 11;
+const byte sh_pin = 12;
+const byte st_pin = 8;
+int n=0,i=0;
+int dh=0,h=0,dm=0,m=0;
+
+byte digit = 0;
+
+const byte digits[10]={
+  B11111100,//0
+  B01100000,//1
+  B11011010,//2
+  B11110010,//3
+  B01100110,//4
+  B10110110,//5
+  B10111110,//6
+  B11100000,//7
+  B11111110,//8
+  B11110110,//9 
+};
+
+void selectSection(byte n)
+{
+  for ( i = 0; i <=3; i++)
+  {
+    digitalWrite(section[i],HIGH);
+  }
+  digitalWrite(section[n],LOW);
+}
+
+void printDigit(byte digit)
+{
+    digitalWrite(st_pin, LOW);
+  	shiftOut( data_pin, sh_pin, LSBFIRST, digits[digit]);
+    digitalWrite(st_pin, HIGH);
+   delay(10);
+}
+
+void setup() {
+    for( i=0; i<=3; i++){
+        pinMode(section[i], OUTPUT);
+    }
+    pinMode(data_pin, OUTPUT);
+    pinMode(sh_pin, OUTPUT);
+    pinMode(st_pin, OUTPUT);
+
+}
+
+void loop() {
+	selectSection(0);
+  	printDigit(m);
+  	delay(5);
+  	selectSection(1);
+	printDigit(2);
+	delay(5);
+	selectSection(2);
+	printDigit(3);
+	delay(5);
+	selectSection(3);
+	printDigit(4);
+	delay(5);
+}
