@@ -34,7 +34,7 @@ void printDigit(byte digit)
     digitalWrite(st_pin, LOW);
   	shiftOut( data_pin, sh_pin, LSBFIRST, digits[digit]);
     digitalWrite(st_pin, HIGH);
-   delay(10);
+  delay(10);
 }
 
 void setup() {
@@ -48,16 +48,22 @@ void setup() {
 }
 
 void loop() {
+  m=(millis()/1000%10);
+  dm=(millis()/10000%100);
+  h=(millis()/100000%1000);
+  dh=(millis()/1000000%10000);
+    
 	selectSection(0);
   	printDigit(m);
   	delay(5);
   	selectSection(1);
-	printDigit(2);
+	printDigit(dm);
 	delay(5);
 	selectSection(2);
-	printDigit(3);
+	printDigit(h);
 	delay(5);
 	selectSection(3);
-	printDigit(4);
+	printDigit(dh);
 	delay(5);
 }
+    
